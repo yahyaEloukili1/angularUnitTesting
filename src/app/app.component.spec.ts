@@ -1,9 +1,27 @@
 import { AppComponent } from "./app.component";
-describe('clicking on hello function',()=>{
-  it('must return hello world',()=>{
-      const comp = new AppComponent()
-      expect(comp.hello()).toBe('hello world')
-  })
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { AuthService } from "./services/auth.service";
+describe('',()=>{
+
+let component : AppComponent
+let fixture : ComponentFixture<AppComponent>
+let authService : AuthService
+beforeEach(()=>{
+
+  fixture = TestBed.createComponent(AppComponent)
+  component = fixture.componentInstance
+  authService = TestBed.inject(AuthService)
+})
+it('should create app component',()=>{
+  expect(component).toBeTruthy()
+})
+it('should create app component',()=>{
+  expect(component.title).toBe('angularTesting')
+})
+it('can login',()=>{
+  expect(component.canLogin('hello world',123)).toBeTruthy()
+})
+
 })
 
 

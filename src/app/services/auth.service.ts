@@ -7,7 +7,11 @@ import { LoginService } from './login.service';
 export class AuthService {
 
   constructor(private loginService : LoginService) { }
-  isAuth(): boolean{
-    return this.loginService.isLogin();
+  isAuth(user : string,password: number): boolean{
+   if(user && password){
+     return true
+   }else{
+     return false
+   }
   }
 }

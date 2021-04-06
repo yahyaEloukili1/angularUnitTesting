@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { AuthService } from "../app/services/auth.service";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,11 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angularTesting';
-
-  hello(){
-    return 'hello world';
-  }
-  hello2(){
-    return 'hello world';
-  }
+constructor(private authService: AuthService){}
+ canLogin(user : string,password: number): boolean{
+ return this.authService.isAuth(user,password)
+ }
 }
