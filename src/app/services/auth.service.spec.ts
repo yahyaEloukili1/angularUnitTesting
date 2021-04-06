@@ -1,21 +1,22 @@
 
 import { AuthService } from "./auth.service";
+import { LoginService } from "./login.service";
 describe('AuhtService',()=>{
   let authService: AuthService
   beforeEach(()=>{
-    authService = new AuthService();
+    authService = new AuthService(new LoginService());
   })
-  afterEach(()=>{
-    localStorage.removeItem('token')
-  })
-  it('isAuth must return true if token is in local storage',()=>{
+
+  it('isAuth must return true if user is logged in',()=>{
     localStorage.setItem('token','hello world')
     expect(authService.isAuth()).toBeTruthy()
   })
-  it('isAuth must return false if token is no token in local storage',()=>{
-
-    expect(authService.isAuth()).toBeFalsy()
+  it('getting fake data using spy',()=>{
+    const mySpy = jasmine.createSpyObj('',['isAuth'])
+    mySpy.isAuth.and.returnValue(new LoginService().isLogin())
+    expect(mySpy.isAuth()).toBe(true, 'wrong data')
   })
+
 })
 
 
