@@ -1,12 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class LoginService  implements OnInit{
+   isLoggedIn: boolean
+  constructor() {
+    this.isLoggedIn = false
+   }
+  ngOnInit(): void {
 
-  constructor() { }
-  isLogin() : boolean{
-    return true
   }
+
 }
