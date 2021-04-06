@@ -1,6 +1,7 @@
 import { TestBed } from "@angular/core/testing"
 import { AuthService } from "./auth.service"
 import { HttpClientModule } from "@angular/common/http";
+import { HttpClientTestingModule,HttpTestingController } from "@angular/common/http/testing";
 interface Post{
   userId: number;
   id: number;
@@ -23,7 +24,34 @@ fdescribe('AuthService',()=>{
     })
   })
 })
+describe('AuthService with mock data',()=>{
+  let service: AuthService
+  let httpMock: HttpTestingController
+  const postMock = {
+    userId: 1,
+    id: 2,
+    title: 'my titlle',
+    body: 'my body'
+  };
+  beforeEach(()=>{
+    TestBed.configureTestingModule({
+      imports : [HttpClientTestingModule]
+    })
+    service = TestBed.inject(AuthService)
+    httpMock = TestBed.inject(HttpTestingController)
+  })
+  it('must get data as expected',()=>{
 
+
+service.getPost(1).subscribe((data:Post)=>{
+    expect(data).toEqual(postMock)
+})
+const req = httpMock.expectOne('https://jsonplaceholder.typicode.com/posts/1')
+  expect(req.request.method).toEqual('GET')
+req.flush(postMock)
+httpMock.verify()
+  })
+})
 
 
 
