@@ -8,7 +8,5 @@ import { AuthService } from "../app/services/auth.service";
 export class AppComponent {
   title = 'angularTesting';
 constructor(private authService: AuthService){}
- canLogin(user : string,password: number): boolean{
- return this.authService.isAuth(user,password)
- }
+
 }

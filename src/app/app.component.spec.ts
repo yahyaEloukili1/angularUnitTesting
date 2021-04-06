@@ -19,7 +19,7 @@ it('should create app component',()=>{
   expect(component.title).toBe('angularTesting')
 })
 it('can login',()=>{
-  expect(component.canLogin('hello world',123)).toBeTruthy()
+
 })
 
 })

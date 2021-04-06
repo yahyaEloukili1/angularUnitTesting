@@ -1,17 +1,21 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { LoginService } from './login.service';
-
+import {HttpClient  } from "@angular/common/http";
+interface Post{
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private loginService : LoginService) { }
-  isAuth(user : string,password: number): boolean{
-   if(user && password){
-     return true
-   }else{
-     return false
-   }
+  constructor(private http: HttpClient) { }
+
+  getPost(postId: number): Observable<Post>{
+      return this.http.get<Post>('https://jsonplaceholder.typicode.com/posts/'+postId);
   }
 }
