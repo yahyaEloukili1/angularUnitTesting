@@ -54,4 +54,16 @@ let userMock : User
     fixture.detectChanges()
     expect(submit.nativeElement.disabled).toBeFalsy();
   })
+  it('submitData must emit email and pass correctly',()=>{
+    let user : User
+    email.nativeElement.value = userMock.email
+    password.nativeElement.value = userMock.password
+    component.submitData.subscribe((data: User)=>{
+     user = data
+    })
+    submit.triggerEventHandler('click',null)
+    expect(user.email).toBe(userMock.email)
+    expect(user.password).toBe(userMock.password)
+   
+  })
 });
